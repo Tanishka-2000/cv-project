@@ -3,6 +3,7 @@ import PersonalDetailForm from './components/PersonalDetailForm';
 import AcademicDetailForm from './components/AcademicDetailForm';
 import ProfessionalDetailForm from './components/ProfessionalDetailForm';
 import Preview from './components/Preview';
+import uniqid from 'uniqid';
 
 class App extends React.Component{
     constructor(props){
@@ -24,7 +25,6 @@ class App extends React.Component{
         this.submitForm = this.submitForm.bind(this);
     }
     addPersonalDetail(data){
-        console.log(data);
         this.setState({
             personalDetail:{
                 name: data.name,
@@ -33,10 +33,10 @@ class App extends React.Component{
                 address: data.address
             }
         });
-        console.log(this.state);
     }
     addAcademicDetail(data){
         let detail = {
+            key: uniqid(),
             degree: data.degree,
             yearOfPassing: data.year,
             percentage: data.marks
@@ -44,10 +44,10 @@ class App extends React.Component{
         this.setState({
             academicDetail: this.state.academicDetail.concat(detail)
         });
-        console.log(this.state);
     }
     addProfessionalDetail(data){
         let detail = {
+            key: uniqid(),
             companyName: data.name,
             position: data.position,
             from: data.from,
@@ -56,7 +56,6 @@ class App extends React.Component{
         this.setState({
             professionalDetail: this.state.professionalDetail.concat(detail)
         });
-        console.log(this.state);
     }
     submitForm(){
         this.setState({renderForm: false})
@@ -67,7 +66,7 @@ class App extends React.Component{
             <PersonalDetailForm onAdd={this.addPersonalDetail}/>
             <AcademicDetailForm onAdd={this.addAcademicDetail}/>
             <ProfessionalDetailForm onAdd={this.addProfessionalDetail}/>
-            <button onClick={this.submitForm}>Submit</button>
+            <button className='show-preview' onClick={this.submitForm}>Submit</button>
         </div>): <Preview details={this.state}/>
     );
 

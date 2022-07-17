@@ -7,9 +7,9 @@ class AcademicDetailPreview extends React.Component{
     render(){
         return(
             <div className='section'>
-                <h1>Academic Details</h1>
+                <h2>Academic Details</h2>
                 {this.props.data.map(data =>
-                    <div>
+                    <div key={data.key}>
                         <p>Degree: {data.degree}</p>
                         <p>Year of Passing: {data.yearOfPassing}</p>
                         <p>percentage: {data.percentage}</p>

@@ -4,12 +4,17 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #222;
+    background-color: #000;
+    color: white;
+}
+#root{
+    width: 99vw;
 }
 form{
     width: 1000px;
-    border: 1px solid #999;
-    padding: 100px
+    border: 1px solid #34B3F1;
+    padding: 100px;
+    margin: 0 auto;
 }
 form>div{
     position: relative;
@@ -20,32 +25,55 @@ label{
     top: 0;
     left: 0;
     opacity: .3;
-    color: #fff;
+    color: #34B3F1;
 }
 input{
     font-size: 2rem;
     width: 800px;
     border: none;
     outline: none;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid #34B3F1;
     background-color: transparent;
     margin-bottom: 20px;
-    color: #eee;
+    color: #34B3F1;
 }
 input:not(:placeholder-shown) + label{
     display: none;
 }
-form>button{
+button{
     width: 400px;
     font-size: 2rem;
     padding: 10px;
     background-color: transparent;
-    border: 1px solid #555;
+    border: 1px solid #34B3F1;
     border-radius: 10px;
     color: white
 
 }
-form>button:hover{
-    background-color: white;
-    color: #222;
+form>button:hover,
+button.show-preview:hover{
+    background-color: #34B3F1;
+}
+.show-preview{
+    width: 900px;
+    margin: 20px 500px;
+}
+
+/* ----CV----- */
+.preview{
+    width:1000px;
+    margin: 10px auto;
+    border: 1px solid #34B3F1;
+    color: #34B3F1;
+    font-size: 2rem;
+}
+.section{
+    padding: 50px;
+    border-bottom: 1px solid #34B3F1;
+}
+.section h2{
+    margin: 0 10px;
+}
+.section>div{
+    border-bottom: 1px solid #34B3F1;
 }

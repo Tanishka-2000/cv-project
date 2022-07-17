@@ -7,9 +7,9 @@ class ProfessionalDetailPreview extends React.Component{
     render(){
         return(
             <div className='section'>
-                <h1>Professional Details</h1>
+                <h2>Professional Details</h2>
                 {this.props.data.map(data =>
-                    <div>
+                    <div  key={data.key}>
                         <p>Company: {data.companyName}</p>
                         <p>position: {data.position}</p>
                         <p>From: {data.from}</p>

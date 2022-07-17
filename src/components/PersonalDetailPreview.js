@@ -7,7 +7,7 @@ class PersonalDetailPreview extends React.Component{
     render(){
         return(
             <div className='section'>
-                <h1>Personal Details</h1>
+                <h2>Personal Details</h2>
                 <p>Name: {this.props.data.name}</p>
                 <p>Email: {this.props.data.email}</p>
                 <p>Contact No.: {this.props.data.phone}</p>
