@@ -28,7 +28,7 @@ class ProfessionalDetailForm extends React.Component{
                 </div>
                 <div>
                     <input id='fromYear' type='number' min='2010' max='2022' placeholder=' '/>
-                    <label htmlFor='fromYear'>Worked Since</label>
+                    <label htmlFor='fromYear'>Working Since</label>
                 </div>
                 <div>
                     <input id='toYear' type='number' min='2010' max='2022' placeholder=' '/>

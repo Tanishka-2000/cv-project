@@ -4,11 +4,11 @@
     box-sizing: border-box;
 }
 body{
-    background-color: pink;
+    background-color: #222;
 }
 form{
     width: 1000px;
-    border: 1px solid #777;
+    border: 1px solid #999;
     padding: 100px
 }
 form>div{
@@ -19,7 +19,8 @@ label{
     font-size: 2rem;
     top: 0;
     left: 0;
-    opacity: .6;
+    opacity: .3;
+    color: #fff;
 }
 input{
     font-size: 2rem;
@@ -29,6 +30,7 @@ input{
     border-bottom: 1px solid #555;
     background-color: transparent;
     margin-bottom: 20px;
+    color: #eee;
 }
 input:not(:placeholder-shown) + label{
     display: none;
@@ -40,9 +42,10 @@ form>button{
     background-color: transparent;
     border: 1px solid #555;
     border-radius: 10px;
+    color: white
 
 }
 form>button:hover{
-    background-color: black;
-    color: #aaa;
+    background-color: white;
+    color: #222;
 }

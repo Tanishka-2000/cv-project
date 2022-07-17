@@ -2,12 +2,13 @@ import React from 'react';
 import PersonalDetailForm from './components/PersonalDetailForm';
 import AcademicDetailForm from './components/AcademicDetailForm';
 import ProfessionalDetailForm from './components/ProfessionalDetailForm';
+import Preview from './components/Preview';
 
 class App extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            renderFrom: true,
+            renderForm: true,
             personalDetail: {
                 name:'',
                 email:'',
@@ -20,6 +21,7 @@ class App extends React.Component{
         this.addPersonalDetail = this.addPersonalDetail.bind(this);
         this.addAcademicDetail = this.addAcademicDetail.bind(this);
         this.addProfessionalDetail = this.addProfessionalDetail.bind(this);
+        this.submitForm = this.submitForm.bind(this);
     }
     addPersonalDetail(data){
         console.log(data);
@@ -56,12 +58,18 @@ class App extends React.Component{
         });
         console.log(this.state);
     }
+    submitForm(){
+        this.setState({renderForm: false})
+    }
     render(){
-        return(<div>
+        return(
+            this.state.renderForm ? (<div>
             <PersonalDetailForm onAdd={this.addPersonalDetail}/>
             <AcademicDetailForm onAdd={this.addAcademicDetail}/>
             <ProfessionalDetailForm onAdd={this.addProfessionalDetail}/>
-        </div>) ;
+            <button onClick={this.submitForm}>Submit</button>
+        </div>): <Preview details={this.state}/>
+    );
 
     }
 }
