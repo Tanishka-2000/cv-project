@@ -17,6 +17,7 @@ class AcademicDetailForm extends React.Component{
     render(){
         return(
             <form onSubmit={this.addDetails}>
+                <h1>Enter your Academic Details</h1>
                 <div>
                     <input id='degree' type='text' placeholder=' '/>
                     <label htmlFor='degree'>Degree</label>

@@ -19,6 +19,7 @@ class PersonalDetailForm extends React.Component{
     render(){
         return(
             <form onSubmit={this.addDetails}>
+                <h1>Enter your personal details</h1>
                 <div>
                     <input id='name' type='text' placeholder=' '/>
                     <label htmlFor='name'>Full Name</label>

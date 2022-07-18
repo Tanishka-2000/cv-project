@@ -10,9 +10,10 @@ class Preview extends React.Component{
     render(){
         return(
             <div className='preview'>
-            <PersonalDetailPreview data={this.props.details.personalDetail}/>
-            <AcademicDetailPreview data={this.props.details.academicDetail}/>
-            <ProfessionalDetailPreview data={this.props.details.professionalDetail}/>
+                <h1> Curriculum Vitae </h1>
+                <PersonalDetailPreview data={this.props.details.personalDetail} onEdit={this.props.edit} />
+                <AcademicDetailPreview data={this.props.details.academicDetail} onEdit={this.props.edit} />
+                <ProfessionalDetailPreview data={this.props.details.professionalDetail} onEdit={this.props.edit} />
             </div>
         );
     }

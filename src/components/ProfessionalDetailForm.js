@@ -18,13 +18,14 @@ class ProfessionalDetailForm extends React.Component{
     render(){
         return(
             <form onSubmit={this.addDetails}>
+                <h1>Enter your professional details</h1>
                 <div>
                     <input id='company' type='text' placeholder=' '/>
                     <label htmlFor='company'>Company Name</label>
                 </div>
                 <div>
                     <input id='position' type='text' placeholder=' '/>
-                    <label htmlFor='position'>Positon</label>
+                    <label htmlFor='position'>Position</label>
                 </div>
                 <div>
                     <input id='fromYear' type='number' min='2010' max='2022' placeholder=' '/>

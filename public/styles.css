@@ -4,17 +4,30 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #000;
-    color: white;
+    background-image: url('./office.jpg');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    color: #555;
 }
 #root{
     width: 99vw;
+    height: 100vh
+}
+#root .main{
+    width: 100%;
+}
+#root .main>h1{
+    font-size: 3rem;
+    margin: 50px auto 50px 550px;
 }
 form{
     width: 1000px;
-    border: 1px solid #34B3F1;
-    padding: 100px;
+    border: 1px solid #555;
+    padding: 50px 100px;
     margin: 0 auto;
+}
+form>h1{
+    margin-bottom: 50px;
 }
 form>div{
     position: relative;
@@ -25,17 +38,17 @@ label{
     top: 0;
     left: 0;
     opacity: .3;
-    color: #34B3F1;
+    color: #555;
 }
 input{
     font-size: 2rem;
     width: 800px;
     border: none;
     outline: none;
-    border-bottom: 1px solid #34B3F1;
+    border-bottom: 1px solid #555;
     background-color: transparent;
     margin-bottom: 20px;
-    color: #34B3F1;
+    color: #555;
 }
 input:not(:placeholder-shown) + label{
     display: none;
@@ -45,14 +58,15 @@ button{
     font-size: 2rem;
     padding: 10px;
     background-color: transparent;
-    border: 1px solid #34B3F1;
+    border: 1px solid #555;
     border-radius: 10px;
-    color: white
+    color: #555;
 
 }
 form>button:hover,
 button.show-preview:hover{
-    background-color: #34B3F1;
+    background-color: #555;
+    color: white;
 }
 .show-preview{
     width: 900px;
@@ -63,17 +77,32 @@ button.show-preview:hover{
 .preview{
     width:1000px;
     margin: 10px auto;
-    border: 1px solid #34B3F1;
-    color: #34B3F1;
+    border: 1px solid #555;
+    color: #555;
     font-size: 2rem;
 }
 .section{
     padding: 50px;
-    border-bottom: 1px solid #34B3F1;
+    border-bottom: 1px solid #555;
 }
 .section h2{
     margin: 0 10px;
 }
-.section>div{
-    border-bottom: 1px solid #34B3F1;
+.section>div:not(.section-header){
+    border-bottom: 1px solid #555;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 30px;
+}
+.section-header{
+    display: flex;
+    justify-content: space-between;
+}
+.section .edit{
+    width: 100px;
+    justify-self:end;
+}
+.section .edit:hover{
+    background-color: #555;
+    color: white;
 }
