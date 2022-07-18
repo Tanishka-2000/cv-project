@@ -13,10 +13,11 @@ class PersonalDetailPreview extends React.Component{
             <div className='section'>
                 <div className='section-header'>
                     <h2>Personal Details</h2>
-                    <button className='edit' onClick={this.edit}>Edit</button>
                 </div>
 
                 <div>
+                    <p> </p>
+                    <button className='edit' onClick={this.edit}>Edit</button>
                     <p>Name: {this.props.data.name}</p>
                     <p>Email: {this.props.data.email}</p>
                     <p>Contact No.: {this.props.data.phone}</p>

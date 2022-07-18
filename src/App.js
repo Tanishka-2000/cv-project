@@ -14,6 +14,7 @@ class App extends React.Component{
                 id:''
             },
             edit:false,
+            add:true,
             showPreview:false,
             personalDetail: {
                 name:'',
@@ -31,7 +32,6 @@ class App extends React.Component{
         this.editForm = this.editForm.bind(this);
     }
     addPersonalDetail(data){
-
             this.setState({
                 personalDetail:{
                     name: data.name,
@@ -44,13 +44,10 @@ class App extends React.Component{
             this.setState({
                 edit: false
             });
-            // push details in right position
-            // change state form edit = true to edit = false
-            // show preview
         }
     }
     addAcademicDetail(data){
-        if(!this.state.edit){
+        if(this.state.add){
             let detail = {
                 key: uniqid(),
                 degree: data.degree,
@@ -58,7 +55,8 @@ class App extends React.Component{
                 percentage: data.marks
             }
             this.setState({
-                academicDetail: this.state.academicDetail.concat(detail)
+                academicDetail: this.state.academicDetail.concat(detail),
+                edit:false
             });
         }else{
             let detail = {
@@ -77,14 +75,11 @@ class App extends React.Component{
                 }),
                 edit:false
             });
-            // push details in right position
-            // change state form edit = true to edit = false
-            // show preview
         }
 
     }
     addProfessionalDetail(data){
-        if(!this.state.edit){
+        if(this.state.add){
             let detail = {
                 key: uniqid(),
                 companyName: data.name,
@@ -93,7 +88,8 @@ class App extends React.Component{
                 to: data.to
             }
             this.setState({
-                professionalDetail: this.state.professionalDetail.concat(detail)
+                professionalDetail: this.state.professionalDetail.concat(detail),
+                edit:false
             });
         }else{
             let detail = {
@@ -113,21 +109,18 @@ class App extends React.Component{
                 }),
                 edit:false
             });
-            // push details in right position
-            // change state form edit = true to edit = false
-            // show preview
         }
 
     }
     submitForm(){
         this.setState({
-            showPreview:true
+            showPreview:true,
         });
     }
-    editForm(form,key){
-        console.log(form +" "+ key);
+    editForm(form, key, isAdd){
         this.setState({
             edit:true,
+            add:isAdd,
             currentForm: {
                 type: form,
                 id: key
@@ -150,14 +143,14 @@ class App extends React.Component{
                 return(<Preview details={this.state} edit={this.editForm}/>);
             }
         }else{
-            let type = this.state.currentForm.type;
-            if(type === 'personal'){
+            let form = this.state.currentForm;
+            if(form.type === 'personal'){
                 return(<PersonalDetailForm onAdd={this.addPersonalDetail} />);
             }
-            if(type === 'academic'){
+            if(form.type === 'academic'){
                 return(<AcademicDetailForm onAdd={this.addAcademicDetail} />);
             }
-            if(type === 'professional'){
+            if(form.type === 'professional'){
                 return(<ProfessionalDetailForm onAdd={this.addProfessionalDetail} />);
             }
         }

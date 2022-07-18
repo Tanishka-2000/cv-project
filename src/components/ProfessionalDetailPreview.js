@@ -4,17 +4,21 @@ class ProfessionalDetailPreview extends React.Component{
     constructor(props){
         super(props);
         this.edit = this.edit.bind(this);
+        this.add = this.add.bind(this);
     }
     edit(e){
         let id = e.target.parentElement.getAttribute('data-key');
-        this.props.onEdit('professional', id);
+        this.props.onEdit('professional', id, false);
+    }
+    add(){
+        this.props.onEdit('professional', null, true);
     }
     render(){
         return(
             <div className='section'>
                 <div className='section-header'>
                     <h2>Professional Details</h2>
-
+                    <button className='edit' onClick={this.add}>Add</button>
                 </div>
 
                 {this.props.data.map(data =>
