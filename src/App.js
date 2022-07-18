@@ -31,7 +31,7 @@ class App extends React.Component{
         this.editForm = this.editForm.bind(this);
     }
     addPersonalDetail(data){
-        if(!this.state.edit){
+
             this.setState({
                 personalDetail:{
                     name: data.name,
@@ -40,8 +40,14 @@ class App extends React.Component{
                     address: data.address
                 }
             });
+        if(this.state.edit){
+            this.setState({
+                edit: false
+            });
+            // push details in right position
+            // change state form edit = true to edit = false
+            // show preview
         }
-
     }
     addAcademicDetail(data){
         if(!this.state.edit){
@@ -54,6 +60,26 @@ class App extends React.Component{
             this.setState({
                 academicDetail: this.state.academicDetail.concat(detail)
             });
+        }else{
+            let detail = {
+                key: this.state.currentForm.id,
+                degree: data.degree,
+                yearOfPassing: data.year,
+                percentage: data.marks
+            }
+            this.setState({
+                academicDetail : this.state.academicDetail.map(data => {
+                    if(data.key === this.state.currentForm.id){
+                        return detail;
+                    }else{
+                        return data;
+                    }
+                }),
+                edit:false
+            });
+            // push details in right position
+            // change state form edit = true to edit = false
+            // show preview
         }
 
     }
@@ -69,6 +95,27 @@ class App extends React.Component{
             this.setState({
                 professionalDetail: this.state.professionalDetail.concat(detail)
             });
+        }else{
+            let detail = {
+                key: this.state.currentForm.id,
+                companyName: data.name,
+                position: data.position,
+                from: data.from,
+                to: data.to
+            }
+            this.setState({
+                professionalDetail : this.state.professionalDetail.map(data => {
+                    if(data.key === this.state.currentForm.id){
+                        return detail;
+                    }else{
+                        return data;
+                    }
+                }),
+                edit:false
+            });
+            // push details in right position
+            // change state form edit = true to edit = false
+            // show preview
         }
 
     }
