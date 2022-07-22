@@ -1,159 +1,146 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PersonalDetailForm from './components/PersonalDetailForm';
 import AcademicDetailForm from './components/AcademicDetailForm';
 import ProfessionalDetailForm from './components/ProfessionalDetailForm';
 import Preview from './components/Preview';
 import uniqid from 'uniqid';
 
-class App extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            currentForm:{
-                type:'',
-                id:''
-            },
-            edit:false,
-            add:true,
-            showPreview:false,
-            personalDetail: {
-                name:'',
-                email:'',
-                phone:'',
-                address:''
-            },
-            academicDetail:[],
-            professionalDetail:[]
-        };
-        this.addPersonalDetail = this.addPersonalDetail.bind(this);
-        this.addAcademicDetail = this.addAcademicDetail.bind(this);
-        this.addProfessionalDetail = this.addProfessionalDetail.bind(this);
-        this.submitForm = this.submitForm.bind(this);
-        this.editForm = this.editForm.bind(this);
+function App (props){
+    const [currentForm, setCurrentForm] = useState({type:'', id:''});
+    const [edit, setEdit] = useState(false);
+    const [add, setAdd] = useState(true);
+    const [showPreview, setShowPreview] = useState(false);
+    const [personalDetail, setPersonalDetail] = useState({
+        name:'',
+        email:'',
+        phone:'',
+        address:''
+    });
+    const [academicDetail, setAcademicDetail] = useState([]);
+    const [professionalDetail, setProfessionalDetail] = useState([]);
+
+    // constructor(props){
+        // super(props);
+        // this.state = {
+        //     currentForm:{
+        //         type:'',
+        //         id:''
+        //     },
+        //     edit:false,
+        //     add:true,
+        //     showPreview:false,
+        //     personalDetail: {
+        //         name:'',
+        //         email:'',
+        //         phone:'',
+        //         address:''
+        //     },
+        //     academicDetail:[],
+        //     professionalDetail:[]
+        // };
+    //     this.addPersonalDetail = this.addPersonalDetail.bind(this);
+    //     this.addAcademicDetail = this.addAcademicDetail.bind(this);
+    //     this.addProfessionalDetail = this.addProfessionalDetail.bind(this);
+    //     this.submitForm = this.submitForm.bind(this);
+    //     this.editForm = this.editForm.bind(this);
+    // }
+    const addPersonalDetail = (data) => {
+        setPersonalDetail({
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            address: data.address
+        });
+
+        if(edit) setEdit(false);
     }
-    addPersonalDetail(data){
-            this.setState({
-                personalDetail:{
-                    name: data.name,
-                    email: data.email,
-                    phone: data.phone,
-                    address: data.address
-                }
-            });
-        if(this.state.edit){
-            this.setState({
-                edit: false
-            });
+
+    const addAcademicDetail = (data) => {
+        let detail = {
+            key: uniqid(),
+            degree: data.degree,
+            yearOfPassing: data.year,
+            percentage: data.marks
         }
-    }
-    addAcademicDetail(data){
-        if(this.state.add){
-            let detail = {
-                key: uniqid(),
-                degree: data.degree,
-                yearOfPassing: data.year,
-                percentage: data.marks
-            }
-            this.setState({
-                academicDetail: this.state.academicDetail.concat(detail),
-                edit:false
-            });
+        if(add){
+            setAcademicDetail([...academicDetail, detail]);
+            setEdit(false);
+
         }else{
-            let detail = {
-                key: this.state.currentForm.id,
-                degree: data.degree,
-                yearOfPassing: data.year,
-                percentage: data.marks
-            }
-            this.setState({
-                academicDetail : this.state.academicDetail.map(data => {
-                    if(data.key === this.state.currentForm.id){
+            detail.key = currentForm.id;
+            setAcademicDetail(
+                academicDetail.map(data => {
+                    if(data.key === currentForm.id){
                         return detail;
                     }else{
                         return data;
                     }
-                }),
-                edit:false
-            });
+            }));
+            setEdit(false);
         }
-
     }
-    addProfessionalDetail(data){
-        if(this.state.add){
-            let detail = {
-                key: uniqid(),
-                companyName: data.name,
-                position: data.position,
-                from: data.from,
-                to: data.to
-            }
-            this.setState({
-                professionalDetail: this.state.professionalDetail.concat(detail),
-                edit:false
-            });
+
+    const addProfessionalDetail = (data) => {
+        let detail = {
+            key: uniqid(),
+            companyName: data.name,
+            position: data.position,
+            from: data.from,
+            to: data.to
+        }
+        if(add){
+            setProfessionalDetail([...professionalDetail, detail]);
+            setEdit(false);
         }else{
-            let detail = {
-                key: this.state.currentForm.id,
-                companyName: data.name,
-                position: data.position,
-                from: data.from,
-                to: data.to
-            }
-            this.setState({
-                professionalDetail : this.state.professionalDetail.map(data => {
-                    if(data.key === this.state.currentForm.id){
+            detail.key = currentForm.id;
+            setProfessionalDetail(professionalDetail.map(data => {
+                    if(data.key === currentForm.id){
                         return detail;
                     }else{
                         return data;
                     }
-                }),
-                edit:false
-            });
+                }));
+            setEdit(false);
         }
+    }
 
+    const submitForm = () => {
+        setShowPreview(true);
     }
-    submitForm(){
-        this.setState({
-            showPreview:true,
+    const editForm = (form, key, isAdd) => {
+        setCurrentForm({
+            type: form,
+            id: key
         });
+        setEdit(true);
+        setAdd(isAdd);
     }
-    editForm(form, key, isAdd){
-        this.setState({
-            edit:true,
-            add:isAdd,
-            currentForm: {
-                type: form,
-                id: key
-            },
-        });
-    }
-    render(){
-        if(!this.state.edit){
-            if(!this.state.showPreview){
-                return(
-                <div className='main'>
-                    <h1>Create your Curriculum Vitae</h1>
-                    <PersonalDetailForm onAdd={this.addPersonalDetail} />
-                    <AcademicDetailForm onAdd={this.addAcademicDetail} />
-                    <ProfessionalDetailForm onAdd={this.addProfessionalDetail} />
-                    <button className='show-preview' onClick={this.submitForm}>Submit</button>
-                </div>
-                );
-            }else{
-                return(<Preview details={this.state} edit={this.editForm}/>);
-            }
+
+    if(!edit){
+        if(!showPreview){
+            return(
+            <div className='main'>
+                <h1>Create your Curriculum Vitae</h1>
+                <PersonalDetailForm onAdd={addPersonalDetail} />
+                <AcademicDetailForm onAdd={addAcademicDetail} />
+                <ProfessionalDetailForm onAdd={addProfessionalDetail} />
+                <button className='show-preview' onClick={submitForm}>Submit</button>
+            </div>
+            );
         }else{
-            let form = this.state.currentForm;
-            if(form.type === 'personal'){
-                return(<PersonalDetailForm onAdd={this.addPersonalDetail} />);
-            }
-            if(form.type === 'academic'){
-                return(<AcademicDetailForm onAdd={this.addAcademicDetail} />);
-            }
-            if(form.type === 'professional'){
-                return(<ProfessionalDetailForm onAdd={this.addProfessionalDetail} />);
-            }
+            return(<Preview details={{personalDetail, academicDetail, professionalDetail}} edit = {editForm}/>);
+        }
+    }else{
+        if(currentForm.type === 'personal'){
+            return(<PersonalDetailForm onAdd={addPersonalDetail} />);
+        }
+        if(currentForm.type === 'academic'){
+            return(<AcademicDetailForm onAdd={addAcademicDetail} />);
+        }
+        if(currentForm.type === 'professional'){
+            return(<ProfessionalDetailForm onAdd={addProfessionalDetail} />);
         }
     }
+
 }
 export default App;

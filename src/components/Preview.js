@@ -4,6 +4,7 @@ import AcademicDetailPreview from './AcademicDetailPreview';
 import ProfessionalDetailPreview from './ProfessionalDetailPreview';
 
 function Preview (props){
+    console.log(props);
     return(
         <div className='preview'>
             <h1> Curriculum Vitae </h1>
